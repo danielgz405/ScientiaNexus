@@ -21,6 +21,7 @@ var (
 		"visitor",
 		"package",
 		"events",
+		"autor",
 	}
 )
 

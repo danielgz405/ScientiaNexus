@@ -14,6 +14,9 @@ type Repository interface {
 	UpdateUser(ctx context.Context, data models.UpdateUser) (*models.Profile, error)
 	DeleteUser(ctx context.Context, id string) error
 
+	// Autor
+	InsertAutor(ctx context.Context, autor *models.InsertAutor) (insertAutor *models.Autor, err error)
+
 	//Close the connection
 	Close() error
 }
