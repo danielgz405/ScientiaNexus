@@ -16,7 +16,10 @@ type Repository interface {
 
 	// Autor
 	InsertAutor(ctx context.Context, autor *models.InsertAutor) (insertAutor *models.Autor, err error)
-
+	GetAutorByEmail(ctx context.Context, email string) (*models.Autor, error)
+	GetAutorById(ctx context.Context, id string) (*models.Autor, error)
+	UpdateAutor(ctx context.Context, data models.UpdateAutor, id string) (*models.Autor, error)
+	DeleteAutor(ctx context.Context, id string) error
 	//Close the connection
 	Close() error
 }
