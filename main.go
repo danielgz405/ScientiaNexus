@@ -52,4 +52,11 @@ func BindRoutes(s server.Server, r *mux.Router) {
 	r.HandleFunc("/autor", handlers.InsertAutorHandler(s)).Methods(http.MethodPost)
 	r.HandleFunc("/autor/delete/{id}", handlers.DeleteAutorHandler(s)).Methods(http.MethodDelete)
 	r.HandleFunc("/autor/update/{id}", handlers.UpdateAutorHandler(s)).Methods(http.MethodPatch)
+
+	//aticle
+	r.HandleFunc("/article", handlers.InsertArticleHandler(s)).Methods(http.MethodPost)
+	r.HandleFunc("/article/delete/{id}", handlers.DeleteArticleHandler(s)).Methods(http.MethodDelete)
+	r.HandleFunc("/article/update/{id}", handlers.UpdateArticleHandler(s)).Methods(http.MethodPatch)
+	r.HandleFunc("/article/list", handlers.ListArticlesHandler(s)).Methods(http.MethodGet)
+
 }

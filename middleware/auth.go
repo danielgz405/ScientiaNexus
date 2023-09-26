@@ -17,10 +17,6 @@ var (
 		"login",
 		"signup",
 		"user",
-		"automobile",
-		"visitor",
-		"package",
-		"events",
 		"autor",
 	}
 )

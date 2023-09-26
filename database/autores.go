@@ -33,10 +33,6 @@ func (repo *MongoRepo) GetAutorById(ctx context.Context, id string) (*models.Aut
 	if err != nil {
 		return nil, err
 	}
-	if err != nil {
-		return nil, err
-	}
-	// Populate autor
 
 	return &autor, nil
 }
