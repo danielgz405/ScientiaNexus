@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/dg/acordia/models"
 	"github.com/dg/acordia/repository"
@@ -14,10 +15,10 @@ import (
 type InsertArticleRequest struct {
 	Name      string   `bson:"name" json:"name"`
 	Autor     string   `bson:"autor" json:"autor"`
-	Date      string   `bson:"date" json:"date"`
 	Content   string   `bson:"content" json:"content"`
 	Documents []string `bson:"documents" json:"documents"`
 	Image     string   `bson:"image" json:"image"`
+	DesertRef string   `bson:"desertRef" json:"desertRef"`
 }
 
 type UpdateArticleRequest struct {
@@ -26,6 +27,7 @@ type UpdateArticleRequest struct {
 	Content   string   `bson:"content" json:"content"`
 	Documents []string `bson:"documents" json:"documents"`
 	Image     string   `bson:"image" json:"image"`
+	DesertRef string   `bson:"desertRef" json:"desertRef"`
 }
 
 func InsertArticleHandler(s server.Server) http.HandlerFunc {
@@ -39,14 +41,17 @@ func InsertArticleHandler(s server.Server) http.HandlerFunc {
 			return
 		}
 		article := models.InsertArticle{}
+		currentTime := time.Now()
+		formattedTime := currentTime.Format("2006-01-02 15:04:05")
 
 		article = models.InsertArticle{
 			Name:      req.Name,
 			Autor:     req.Autor,
-			Date:      req.Date,
+			Date:      formattedTime,
 			Content:   req.Content,
 			Documents: req.Documents,
 			Image:     req.Image,
+			DesertRef: req.DesertRef,
 		}
 
 		createdArticle, err := repository.InsertArticle(r.Context(), &article)
@@ -95,6 +100,7 @@ func UpdateArticleHandler(s server.Server) http.HandlerFunc {
 			Content:   req.Content,
 			Documents: req.Documents,
 			Image:     req.Image,
+			DesertRef: req.DesertRef,
 		}
 
 		updatedArticle, err := repository.UpdateArticle(r.Context(), article, params["id"])

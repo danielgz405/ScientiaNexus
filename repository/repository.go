@@ -20,6 +20,7 @@ type Repository interface {
 	GetAutorById(ctx context.Context, id string) (*models.Autor, error)
 	UpdateAutor(ctx context.Context, data models.UpdateAutor, id string) (*models.Autor, error)
 	DeleteAutor(ctx context.Context, id string) error
+	ListAutor(ctx context.Context) ([]models.Autor, error)
 
 	// Article
 	InsertArticle(ctx context.Context, article *models.InsertArticle) (insertArticle *models.Article, err error)

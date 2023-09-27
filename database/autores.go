@@ -21,6 +21,7 @@ func (repo *MongoRepo) InsertAutor(ctx context.Context, autor *models.InsertAuto
 	}
 	return insertAutor, nil
 }
+
 func (repo *MongoRepo) GetAutorById(ctx context.Context, id string) (*models.Autor, error) {
 	collection := repo.client.Database("ScientiaNexus").Collection("autors")
 	var autor models.Autor
@@ -36,6 +37,7 @@ func (repo *MongoRepo) GetAutorById(ctx context.Context, id string) (*models.Aut
 
 	return &autor, nil
 }
+
 func (repo *MongoRepo) GetAutorByEmail(ctx context.Context, email string) (*models.Autor, error) {
 	collection := repo.client.Database("ScientiaNexus").Collection("autors")
 	var autor models.Autor
@@ -45,6 +47,20 @@ func (repo *MongoRepo) GetAutorByEmail(ctx context.Context, email string) (*mode
 	}
 	return &autor, nil
 }
+
+func (repo *MongoRepo) ListAutor(ctx context.Context) ([]models.Autor, error) {
+	collection := repo.client.Database("ScientiaNexus").Collection("autors")
+	cursor, err := collection.Find(ctx, bson.M{})
+	if err != nil {
+		return nil, err
+	}
+	var autor []models.Autor
+	if err = cursor.All(ctx, &autor); err != nil {
+		return nil, err
+	}
+	return autor, nil
+}
+
 func (repo *MongoRepo) UpdateAutor(ctx context.Context, data models.UpdateAutor, id string) (*models.Autor, error) {
 	collection := repo.client.Database("ScientiaNexus").Collection("autors")
 	oid, err := primitive.ObjectIDFromHex(id)
@@ -75,6 +91,7 @@ func (repo *MongoRepo) UpdateAutor(ctx context.Context, data models.UpdateAutor,
 	}
 	return autor, nil
 }
+
 func (repo *MongoRepo) DeleteAutor(ctx context.Context, id string) error {
 	collection := repo.client.Database("ScientiaNexus").Collection("autors")
 	oid, err := primitive.ObjectIDFromHex(id)

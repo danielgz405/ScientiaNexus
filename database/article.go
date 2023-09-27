@@ -65,6 +65,7 @@ func (repo *MongoRepo) UpdateArticle(ctx context.Context, data models.UpdateArti
 		"content":   data.Content,
 		"documents": data.Documents,
 		"image":     data.Image,
+		"desertRef": data.DesertRef,
 	}
 	for key, value := range iterableData {
 		if value != "" {

@@ -18,6 +18,7 @@ var (
 		"signup",
 		"user",
 		"autor",
+		"article",
 	}
 )
 

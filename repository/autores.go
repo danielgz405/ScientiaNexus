@@ -21,3 +21,7 @@ func UpdateAutor(ctx context.Context, data models.UpdateAutor, id string) (*mode
 func DeleteAutor(ctx context.Context, id string) error {
 	return implementation.DeleteAutor(ctx, id)
 }
+
+func ListAutor(ctx context.Context) ([]models.Autor, error) {
+	return implementation.ListAutor(ctx)
+}

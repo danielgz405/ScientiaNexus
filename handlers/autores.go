@@ -50,6 +50,7 @@ func InsertAutorHandler(s server.Server) http.HandlerFunc {
 		json.NewEncoder(w).Encode(profile)
 	}
 }
+
 func UpdateAutorHandler(s server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Handle request
@@ -90,5 +91,37 @@ func DeleteAutorHandler(s server.Server) http.HandlerFunc {
 			return
 		}
 		w.WriteHeader(http.StatusOK)
+	}
+}
+
+func ListAutorHandler(s server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// Handle request
+		w.Header().Set("Content-Type", "application/json")
+		autor, err := repository.ListAutor(r.Context())
+		if err != nil {
+			responses.InternalServerError(w, err.Error())
+			return
+		}
+		if autor == nil {
+			autor = []models.Autor{}
+		}
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(autor)
+	}
+}
+
+func GetAutorByIdHandler(s server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// Handle request
+		w.Header().Set("Content-Type", "application/json")
+		params := mux.Vars(r)
+		article, err := repository.GetAutorById(r.Context(), params["id"])
+		if err != nil {
+			responses.InternalServerError(w, err.Error())
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(article)
 	}
 }

@@ -10,6 +10,7 @@ type Article struct {
 	Content   string             `bson:"content" json:"content"`
 	Documents []string           `bson:"documents" json:"documents"`
 	Image     string             `bson:"image" json:"image"`
+	DesertRef string             `bson:"desertRef" json:"desertRef"`
 }
 
 type InsertArticle struct {
@@ -19,6 +20,7 @@ type InsertArticle struct {
 	Content   string   `bson:"content" json:"content"`
 	Documents []string `bson:"documents" json:"documents"`
 	Image     string   `bson:"image" json:"image"`
+	DesertRef string   `bson:"desertRef" json:"desertRef"`
 }
 
 type UpdateArticle struct {
@@ -27,4 +29,5 @@ type UpdateArticle struct {
 	Content   string   `bson:"content" json:"content"`
 	Documents []string `bson:"documents" json:"documents"`
 	Image     string   `bson:"image" json:"image"`
+	DesertRef string   `bson:"desertRef" json:"desertRef"`
 }
